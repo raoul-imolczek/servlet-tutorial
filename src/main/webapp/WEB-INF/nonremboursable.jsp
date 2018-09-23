@@ -4,10 +4,11 @@
     <head>
         <meta charset="UTF-8">
         <link rel="stylesheet" href="css/style.css" />
-        <title>Hello World!</title>
+        <title>Erreur</title>
         <script type="text/javascript" src="js/script.js"></script>
     </head>
     <body>
-        <h1>Hello <%= request.getParameter("name") %>!</h1>
-     </body>
+        <h1>Erreur</h1>
+        <p>Le crédit n'est pas remboursable !</p>
+    </body>
 </html>

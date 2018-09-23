@@ -4,4 +4,23 @@
 
 <web-app>
     <display-name>My Hello World Web App</display-name>
+    
+    <servlet>
+        <servlet-name>MainServlet</servlet-name>
+        <servlet-class>eu.eisti.p2k19.fintech.fbo.servlet.MainServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MainServlet</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CalculetteCredit</servlet-name>
+        <servlet-class>eu.eisti.p2k19.fintech.fbo.servlet.CalculatorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CalculetteCredit</servlet-name>
+        <url-pattern>/calculette-credit</url-pattern>
+    </servlet-mapping>
+    
 </web-app>
