@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.calcul.credit.fbo.fintech.p2k19.eisti.eu/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CalculCreditService" targetNamespace="http://service.calcul.credit.fbo.fintech.p2k19.eisti.eu/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.calcul.credit.fbo.fintech.p2k19.eisti.eu/" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://service.calcul.credit.fbo.fintech.p2k19.eisti.eu/">
+  <xs:element name="ResultatCalculCredit" type="tns:resultatCalculCredit"/>
+  <xs:element name="calculCredit" type="tns:calculCredit"/>
+  <xs:element name="calculCreditResponse" type="tns:calculCreditResponse"/>
+  <xs:complexType name="calculCredit">
+    <xs:sequence>
+      <xs:element name="montant" type="xs:double"/>
+      <xs:element name="apport" type="xs:double"/>
+      <xs:element name="taux" type="xs:double"/>
+      <xs:element name="mensualite" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="calculCreditResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="tns:resultatCalculCredit"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="resultatCalculCredit">
+    <xs:sequence>
+      <xs:element name="duree" type="xs:int"/>
+      <xs:element name="taeg" type="xs:double"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TauxUsureException" type="tns:TauxUsureException"/>
+  <xs:complexType name="TauxUsureException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="CreditPasRemboursableException" type="tns:CreditPasRemboursableException"/>
+  <xs:complexType name="CreditPasRemboursableException">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="calculCreditResponse">
+    <wsdl:part element="tns:calculCreditResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="TauxUsureException">
+    <wsdl:part element="tns:TauxUsureException" name="TauxUsureException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="calculCredit">
+    <wsdl:part element="tns:calculCredit" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CreditPasRemboursableException">
+    <wsdl:part element="tns:CreditPasRemboursableException" name="CreditPasRemboursableException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CalculCreditService">
+    <wsdl:operation name="calculCredit">
+      <wsdl:input message="tns:calculCredit" name="calculCredit">
+    </wsdl:input>
+      <wsdl:output message="tns:calculCreditResponse" name="calculCreditResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:TauxUsureException" name="TauxUsureException">
+    </wsdl:fault>
+      <wsdl:fault message="tns:CreditPasRemboursableException" name="CreditPasRemboursableException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CalculCreditServiceSoapBinding" type="tns:CalculCreditService">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="calculCredit">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="calculCredit">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="calculCreditResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="TauxUsureException">
+        <soap:fault name="TauxUsureException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="CreditPasRemboursableException">
+        <soap:fault name="CreditPasRemboursableException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CalculCreditService">
+    <wsdl:port binding="tns:CalculCreditServiceSoapBinding" name="CalculCreditServiceImplPort">
+      <soap:address location="http://localhost:8080/web-service-calcul/services/CalculCreditService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

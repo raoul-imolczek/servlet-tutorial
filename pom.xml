@@ -13,6 +13,7 @@
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <cxf.version>3.0.5</cxf.version>
     </properties>    
 
 	<dependencies>
@@ -37,6 +38,7 @@
         <finalName>servlet-tutorial</finalName>
     
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -46,6 +48,49 @@
                     <target>${maven.compiler.target}</target>
                 </configuration>
             </plugin>  
+            
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-codegen-plugin</artifactId>
+                <version>${cxf.version}</version>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <sourceRoot>${project.build.directory}/generated/cxf</sourceRoot>
+                            <wsdlOptions>
+                                <wsdlOption>
+                                    <wsdl>${basedir}/src/main/resources/calculcredit.wsdl</wsdl>
+                                </wsdlOption>
+                            </wsdlOptions>
+                        </configuration>
+                        <goals>
+                            <goal>wsdl2java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <plugin>
+            	<groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+            		<execution>
+            			<id>add-source</id>
+            			<phase>generate-sources</phase>
+            			<goals>
+            				<goal>add-source</goal>
+            			</goals>
+            			<configuration>
+            				<sources>
+            					<source>${project.build.directory}/generated-sources/cxf/</source>
+            				</sources>
+            			</configuration>
+            		</execution>
+                </executions>
+            </plugin>
+            
         </plugins>
     </build>
 

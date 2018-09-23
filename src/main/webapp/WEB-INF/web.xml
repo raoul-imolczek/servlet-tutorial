@@ -22,5 +22,14 @@
         <servlet-name>CalculetteCredit</servlet-name>
         <url-pattern>/calculette-credit</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>CalculetteCreditSOAP</servlet-name>
+        <servlet-class>eu.eisti.p2k19.fintech.fbo.servlet.CalculatorSoapClientServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CalculetteCreditSOAP</servlet-name>
+        <url-pattern>/calculette-credit-soap</url-pattern>
+    </servlet-mapping>
     
 </web-app>
